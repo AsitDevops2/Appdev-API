@@ -20,6 +20,10 @@ import java.util.List;
 import java.util.Optional;
 
 
+/**
+ * @author abhay.thakur
+ *
+ */
 @Service(value = "userService")
 public class UserServiceImpl implements UserDetailsService, UserService {
 	
