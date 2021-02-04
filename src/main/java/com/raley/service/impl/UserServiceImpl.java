@@ -58,6 +58,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
 	@Override
 	public User findOne(String email) {
+		//email find
 		return userDao.findByEmail(email);
 	}
 
