@@ -4,7 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.raley.model.User;
-
+//Asit
 @Repository
 public interface UserDao extends CrudRepository<User, Integer> {
 
