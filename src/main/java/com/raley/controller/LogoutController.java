@@ -8,7 +8,5 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class LogoutController {
-	
 	Logger logger = LoggerFactory.getLogger(LogoutController.class);
-
 }
