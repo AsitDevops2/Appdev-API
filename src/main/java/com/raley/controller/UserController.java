@@ -5,11 +5,14 @@ import com.raley.model.User;
 import com.raley.model.UserDto;
 import com.raley.service.UserService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 /**
  * @author abhay.thakurr
  *
@@ -18,40 +21,39 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+	Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
 
-    @PostMapping("/save")
-    public ApiResponse<User> saveVendor(@RequestBody UserDto user){
-    	if(userService.findOne(user.getEmail())!=null) {
-            return new ApiResponse<>(HttpStatus.OK.value(), "User already exist.!",null);
-    	}else {
-            return new ApiResponse<>(HttpStatus.OK.value(), "User saved successfully.",userService.save(user));
-    	}
-    }
+	@PostMapping("/save")
+	public ApiResponse<User> saveVendor(@RequestBody UserDto user) {
+		if (userService.findOne(user.getEmail()) != null) {
+			return new ApiResponse<>(HttpStatus.OK.value(), "User already exist.!", null);
+		} else {
+			return new ApiResponse<>(HttpStatus.OK.value(), "User saved successfully.", userService.save(user));
+		}
+	}
 
-    @GetMapping("/list")
-    public ApiResponse<List<User>> listUser(){
-        return new ApiResponse<>(HttpStatus.OK.value(), "User list fetched successfully.",userService.findAll());
-    }
+	@GetMapping("/list")
+	public ApiResponse<List<User>> listUser() {
+		return new ApiResponse<>(HttpStatus.OK.value(), "User list fetched successfully.", userService.findAll());
+	}
 
-    @GetMapping("/getUser/{id}")
-    public ApiResponse<User> getOne(@PathVariable int id){
-        return new ApiResponse<>(HttpStatus.OK.value(), "User fetched successfully.",userService.findById(id));
-    }
+	@GetMapping("/getUser/{id}")
+	public ApiResponse<User> getOne(@PathVariable int id) {
+		return new ApiResponse<>(HttpStatus.OK.value(), "User fetched successfully.", userService.findById(id));
+	}
 
-    @PutMapping("/updateUser/{id}")
-    public ApiResponse<UserDto> updateVendor(@RequestBody UserDto userDto) {
-        return new ApiResponse<>(HttpStatus.OK.value(), "User updated successfully.",userService.update(userDto));
-    }
+	@PutMapping("/updateUser/{id}")
+	public ApiResponse<UserDto> updateVendor(@RequestBody UserDto userDto) {
+		return new ApiResponse<>(HttpStatus.OK.value(), "User updated successfully.", userService.update(userDto));
+	}
 
-    @DeleteMapping("/deleteUser/{id}")
-    public ApiResponse<Void> deleteVendor(@PathVariable int id) {
-        userService.delete(id);
-        return new ApiResponse<>(HttpStatus.OK.value(), "User deleted successfully.", null);
-    }
-
-
+	@DeleteMapping("/deleteUser/{id}")
+	public ApiResponse<Void> deleteVendor(@PathVariable int id) {
+		userService.delete(id);
+		return new ApiResponse<>(HttpStatus.OK.value(), "User deleted successfully.", null);
+	}
 
 }
